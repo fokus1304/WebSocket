@@ -1,0 +1,48 @@
+<Window
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:vm="using:dem.ViewModels"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+	x:Class="dem.Views.MainWindow"
+	x:DataType="vm:MainWindowViewModel"
+	Icon="/Assets/avalonia-logo.ico"
+	x:CompileBindings="True"
+	Title="dem">
+
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<Grid RowDefinitions="* *">
+	<ListBox Grid.Row="0" ItemsSource="{Binding Messages}">
+		<ListBox.ItemTemplate>
+			<DataTemplate>
+				<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding}"/>
+			</DataTemplate>
+		</ListBox.ItemTemplate>
+
+	</ListBox>
+	
+		<StackPanel Grid.Row="1">
+			<TextBox
+				Text="{Binding CurrentMessage}"
+				Width="300"
+				HorizontalAlignment="Center"/>
+
+			<Button
+				Command="{Binding SendMessage}"
+				CommandParameter="{Binding CurrentMessage}"
+				Width="120"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Bottom"
+				
+				Content="Send Message"
+				HorizontalContentAlignment="Center"/>
+
+		</StackPanel>
+	</Grid>
+</Window>
